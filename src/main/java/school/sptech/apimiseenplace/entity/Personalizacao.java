@@ -4,18 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
-public class Produto {
+public class Personalizacao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idProduto;
-    private String nome;
-    private Double preco;
-    private String descricao;
-    private String foto;
-    private int qtdDisponivel;
+    private Integer idPersonalizacao;
+    private String tema;
 
     @ManyToOne
     private Recheio recheio;
@@ -26,9 +25,6 @@ public class Produto {
     @ManyToOne
     private Cobertura cobertura;
 
-    @ManyToOne
-    private UnidadeMedida unidadeMedida;
-
-    @ManyToOne
-    private TipoProduto tipoProduto;
+    @OneToMany(mappedBy = "personalizacao")
+    private List<ProdutoPedido> produtoPedidos;
 }

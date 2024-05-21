@@ -1,49 +1,36 @@
 package school.sptech.apimiseenplace.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String cliente;
-    private LocalDate dataEntrega;
+    private Integer idPedido;
+    private LocalDate dtPedido;
+    private Double vlPedido;
+    private char status;
+    private Double valorSinal;
+
+    @ManyToOne
+    private FormaEntrega formaEntrega;
+
     @OneToMany(mappedBy = "pedido")
-    private List<Produto> produtos;
+    private List<ProdutoPedido> produtoPedidos;
 
-    public Integer getId() {
-        return id;
-    }
+    @ManyToOne
+    private Cliente cliente;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "pedido")
+    private List<Festa> festas;
 
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
-    public LocalDate getDataEntrega() {
-        return dataEntrega;
-    }
-
-    public void setDataEntrega(LocalDate dataEntrega) {
-        this.dataEntrega = dataEntrega;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
+    @ManyToOne
+    private FormaPagamento formaPagamento;
 }

@@ -17,33 +17,5 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProdutoService {
 
-    private final ProdutoRepository repository;
-
-    private final PedidoService pedidoService;
-
-    public ProdutoListagemDTO cadastrarProduto(ProdutoCriacaoDTO produtoCriacao){
-        if(produtoCriacao == null) throw new BadRequestException("Produto de Criação");
-
-        Pedido pedido = pedidoService.encontrarPorId(produtoCriacao.getPedidoId());
-        if (pedido == null) throw new NaoEncontradoException("Pedido OPT");
-
-        Produto produto = ProdutoMapper.toEntity(produtoCriacao, pedido);
-        produto = repository.save(produto);
-
-        return ProdutoMapper.toListagemDto(produto);
-    }
-
-    public List<ProdutoListagemDTO> listarProdutos(){
-        List<Produto> produtos = repository.findAll();
-        return ProdutoMapper.toListagemDto(produtos);
-    }
-
-    public void deletarProdutoPorId(Integer id){
-        if(!repository.existsById(id)){
-            throw new BadRequestException("Produto");
-        }
-
-        repository.deleteById(id);
-    }
 
 }

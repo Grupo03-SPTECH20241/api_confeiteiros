@@ -1,5 +1,7 @@
 package school.sptech.apimiseenplace.dto.produto;
 
+import school.sptech.apimiseenplace.dto.produto_pedido.ProdutoPedidoListagemDTO;
+
 public class ProdutoListagemDTO {
     private Integer id;
     private String nome;
