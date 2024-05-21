@@ -6,14 +6,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Pedido {
+public class PedidoFesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String cliente;
-    private LocalDate dataEntrega;
-    @OneToMany(mappedBy = "pedido")
+    @ElementCollection
     private List<Produto> produtos;
+    private LocalDate dataEntrega;
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    private CEP cep;
 
     public Integer getId() {
         return id;
@@ -31,6 +33,18 @@ public class Pedido {
         this.cliente = cliente;
     }
 
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public void adicionarProduto(Produto novoProduto) {
+        this.produtos.add(novoProduto);
+    }
+
     public LocalDate getDataEntrega() {
         return dataEntrega;
     }
@@ -39,11 +53,11 @@ public class Pedido {
         this.dataEntrega = dataEntrega;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public CEP getCep() {
+        return cep;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setCep(CEP cep) {
+        this.cep = cep;
     }
 }

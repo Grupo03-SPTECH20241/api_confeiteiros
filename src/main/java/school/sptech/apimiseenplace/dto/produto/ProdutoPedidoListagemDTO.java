@@ -1,19 +1,11 @@
-package school.sptech.apimiseenplace.entity;
-
-import jakarta.persistence.*;
+package school.sptech.apimiseenplace.dto.produto;
 
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-public class Pedido {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProdutoPedidoListagemDTO {
     private Integer id;
     private String cliente;
     private LocalDate dataEntrega;
-    @OneToMany(mappedBy = "pedido")
-    private List<Produto> produtos;
 
     public Integer getId() {
         return id;
@@ -37,13 +29,5 @@ public class Pedido {
 
     public void setDataEntrega(LocalDate dataEntrega) {
         this.dataEntrega = dataEntrega;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 }
